@@ -6,10 +6,12 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
+  before_filter :require_login, only: [:new, :create, :edit, :update, :destroy]
+
   def show
     @article = Article.find(params[:id])
     @comment = Comment.new
-    @comment.article_id = @article.id 
+    @comment.article_id = @article.id
   end
 
   def new
